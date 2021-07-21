@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reports
+{% endblock %}
+
+{% block main %}
+    <body class="bg-imagea">
+        <div>
+            <h1 style="color: #000">Report Generator</h1>
+            <p></p>
+            <h2>Simply type in any US Equity ticker and click generate report. Equity Research made easy!</h2>
+            <p></p>
+        </div>
+
+        <hr>
+        <p></p>
+
+        <form action="/reports" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="ticker" placeholder="Ticker" type="text">
+            </div>
+            <button type="submit">Generate Report</button>
+        </form>
+    </body>
+{% endblock %}

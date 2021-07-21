@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   Info
+{% endblock %}
+
+{% block main %}
+    <body class="bg-imagea">
+        <div>
+            <h1 style="color: #000">Information</h1>
+            <p></p>
+            <hr>
+        </div>
+        <div>
+            <div class="section3">
+                <h5>
+                    RapidResearch was designed to make life easier for investors without access to large amounts of institutional data.
+                    Even when this data can be obtained it is like opening the floodgates, with an endless torrent of information coming our way.
+                    By making use of a variety of finance API's and an array of endpoints; RapidResearch gathers
+                    the most commonly used metrics used in evaluating companies for a specific ticker.
+                </h5>
+                <p></p>
+                <h5>
+                    All the user has to do is punch in the ticker and the program outputs a report on the company. To make things easier for users,
+                    the calculations for the more complicated figures are included in popovers, simply click on any of them to find
+                    out more about the calculations used and market averages/target ranges. I acknowledge there may be certain biases evident
+                    as despite most conventionally used metrics being included, there are certain figures that I am accustomed to which led to their inclusion.
+                </h5>
+                <p></p>
+                <hr>
+            </div>
+            <div class = "section4">
+                <h5 style="text-align: left">Planned features that have yet to come to fruition:</h5>
+                <p></p>
+                <hr>
+                <p></p>
+                <ol>
+                    <h5 style="text-align: left"><li>Access to different Financial Products and Markets (Current limitation to US equities is a result of API resource constraints)</li></h5>
+                    <hr>
+                    <h5 style="text-align: left"><li>Additional Data - Formularisation of certain metrics involving a large amount of calculation (Current limitation due to time constraints)</li></h5>
+                    <hr>
+                    <h5 style="text-align: left"><li>Additional graphs - Interactive Graphs with different time-frame and overlay options (Currently do not know how to use plotly)</li></h5>
+                    <hr>
+                    <h5 style="text-align: left"><li>Option to customise report output, by including or not including certain metrics/graphs or customisation in aesthetic choices (colour, font etc.)</li></h5>
+                </dl>
+                <p></p>
+                <hr>
+            </div>
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <script>
+        (document).ready(function(){
+        ('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+    <body class="bg-imagea">
+        <div>
+            <p></p>
+            <hr>
+            <p></p>
+            <h1 style="font-size: 65px">RapidResearch</h1>
+            <p></p>
+            <a href="/reports"><button>Start Researching</a></button>
+            <p></p>
+            <hr>
+            <p></p>
+        </div>
+        <p></p>
+        <hr>
+        <p></p>
+        <div>
+            <p></p>
+            <div class="section3">
+                <table class="table table-striped table-bordered table-dark table-hover">
+                    <thead class="thead-light">
+                        <tr><th colspan="4"><h4><b>Biggest Gainers</b></h4></th></tr>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Company Name</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gains in gainer %}
+                        <tr>
+                            <td>{{ gains["ticker"] }}</td>
+                            <td>{{ gains["companyName"] }}</td>
+                            <td>{{ gains["price"] }}</td>
+                            <td style="color:LightGreen">{{ gains["changesPercentage"] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p></p>
+                <hr>
+                <p></p>
+                <table class="table table-striped table-bordered table-dark table-hover">
+                    <thead class="thead-light">
+                        <tr><th colspan="4"><h4><b>Biggest Losers</b></h4></th></tr>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Company Name</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for losers in loser %}
+                        <tr>
+                            <td>{{ losers["ticker"] }}</td>
+                            <td>{{ losers["companyName"] }}</td>
+                            <td>{{ losers["price"] }}</td>
+                            <td style="color:red">{{ losers["changesPercentage"] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p></p>
+                <hr>
+                <p></p>
+                <table class="table table-striped table-bordered table-dark table-hover">
+                    <thead class="thead-light">
+                        <tr><th colspan="4"><h4><b>Most Actives</b></h4></th></tr>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Company Name</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for act in active %}
+                        <tr>
+                            <td>{{ act["ticker"] }}</td>
+                            <td>{{ act["companyName"] }}</td>
+                            <td>{{ act["price"] }}</td>
+                            <td>{{ act["changesPercentage"] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section4">
+                <table class="table table-striped table-bordered table-dark table-hover">
+                    <thead class="thead-light">
+                        <tr><th colspan="4"><h4><b>Sector Daily Change</b></h4></th></tr>
+                        <tr>
+                            <th>Sector</th>
+                            <th width="125">{{ date }}</th>
+                            <th width="125">{{ date1 }}</th>
+                            <th width="125">{{ date2 }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Utilities</td>
+                            <td>{{ sector[0]["utilitiesChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["utilitiesChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["utilitiesChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Materials</td>
+                            <td>{{ sector[0]["basicMaterialsChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["basicMaterialsChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["basicMaterialsChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Communication Services</td>
+                            <td>{{ sector[0]["communicationServicesChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["communicationServicesChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["communicationServicesChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Conglomerates</td>
+                            <td>{{ sector[0]["conglomeratesChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["conglomeratesChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["conglomeratesChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumer Cyclical</td>
+                            <td>{{ sector[0]["consumerCyclicalChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["consumerCyclicalChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["consumerCyclicalChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumer Defensive</td>
+                            <td>{{ sector[0]["consumerDefensiveChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["consumerDefensiveChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["consumerDefensiveChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Energy</td>
+                            <td>{{ sector[0]["energyChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["energyChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["energyChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Financials</td>
+                            <td>{{ sector[0]["financialChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["financialChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["financialChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Financial Services</td>
+                            <td>{{ sector[0]["financialServicesChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["financialServicesChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["financialServicesChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Healthcare</td>
+                            <td>{{ sector[0]["healthcareChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["healthcareChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["healthcareChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Industrials</td>
+                            <td>{{ sector[0]["industrialsChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["industrialsChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["industrialsChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Real Estate</td>
+                            <td>{{ sector[0]["realEstateChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["realEstateChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["realEstateChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Services</td>
+                            <td>{{ sector[0]["servicesChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["servicesChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["servicesChangesPercentage"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Technology</td>
+                            <td>{{ sector[0]["technologyChangesPercentage"] }}</td>
+                            <td>{{ sector[1]["technologyChangesPercentage"] }}</td>
+                            <td>{{ sector[2]["technologyChangesPercentage"] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+            </div>
+        </div>
+    </body>
+
+{% endblock %}

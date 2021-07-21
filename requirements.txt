@@ -1,0 +1,10 @@
+Flask
+cs50
+os
+requests
+json
+urllib
+pandas
+matplotlib
+base64
+io

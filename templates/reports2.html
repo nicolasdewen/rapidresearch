@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reports
+{% endblock %}
+
+{% block main %}
+    <script>
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+    <h1 style="color:#000; text-align:left">{{ prof["companyName"] }} ({{ prof["symbol"] }})</h1>
+    <h2 style="color:#000">Industry: {{ prof["industry"] }}</h2>
+    <p style="text-align:right; font-size: 8px">Click on any underlined item for more information*</p>
+    <hr>
+
+    <div class="section1">
+        <img src="data:image/png;base64,{{ encoded }}" align="center">
+        <p></p>
+        <p style="text-align:left"><b>Overview:</b> {{ prof["description"] }}</p>
+        <p></p>
+        <hr>
+        <p></p>
+
+        <h2 style="text-align:left"><b>Value Creation</b></h2>
+
+        <h3>Revenue Growth</h3>
+        <table class="table table-striped table-bordered table-light table-hover">
+            <thead>
+                <tr>
+                    <th>{{ pl[0]["date"] }}</th>
+                    <th>{{ pl[1]["date"] }}</th>
+                    <th>{{ pl[2]["date"] }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ pl[0]["growthRevenue"] }}</td>
+                    <td>{{ pl[1]["growthRevenue"] }}</td>
+                    <td>{{ pl[2]["growthRevenue"] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p></p>
+        <p style="text-align:left"><b>Average Revenue Growth:</b> {{ avgrev }}%</p>
+        <p></p>
+
+        <h3>R&D Expense Growth</h3>
+        <table class="table table-striped table-bordered table-light table-hover">
+            <thead>
+                <tr>
+                    <th>{{ pl[0]["date"] }}</th>
+                    <th>{{ pl[1]["date"] }}</th>
+                    <th>{{ pl[2]["date"] }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ pl[0]["growthResearchAndDevelopmentExpenses"] }}</td>
+                    <td>{{ pl[1]["growthResearchAndDevelopmentExpenses"] }}</td>
+                    <td>{{ pl[2]["growthResearchAndDevelopmentExpenses"] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p></p>
+        <p style="text-align:left"><b>Average R&D Expense Growth:</b> {{ avgrnd }}%</p>
+        <p></p>
+        <p style="text-align:left" data-toggle="popover" title="ROIC" data-content="Return on Invested Capital assesses a company's efficiency in allocation capital to profitable investments. >2% typically indicates value creation. (NOPAT/InvestedCapital) "><u><b>Return on Invested Capital:</b></u> {{ roic }}%</p>
+        <p style="text-align:left">{{ valcreate }}</p>
+        <hr>
+        <p></p>
+        <h3>Latest News on {{ prof["symbol"] }}</h3>
+        <table class="table table-striped table-bordered table-light table-hover">
+            <thead>
+                <tr>
+                    <th width="200"></th>
+                    <th width="500">Headline</th>
+                    <th width="200">Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for news in new %}
+                <tr>
+                    <td><img src={{ news["image"] }} alt="" height=100 width=200></img></td>
+                    <td><a href ={{ news["url"] }}>{{ news["title"] }} ({{ news["publishedDate"] }})</a></td>
+                    <td>{{ news["site"] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="section2">
+        <p></p>
+        <h2 style="color: #000; text-align:center">Last: {{ prof["price"] }}</h2>
+        <p></p>
+        <hr>
+        <p></p>
+        <h2 style="color: #000; text-align:center" data-toggle="popover" title="Rating" data-content="Our API does not currently carry Analyst Consensus recommendations. As such rating is calculated on the following weighted metrics. [DCF, ROE, ROA, PE, Price-Book, Debt-to-Equity] "><u>{{ rate }}</u></h2>
+        <p></p>
+        <hr>
+        <p></p>
+        <h2 style="color: #000; text-align:center">Key Figures</h2>
+        <p></p>
+        <p style="color: #000; text-align:center">DCF Value: ${{ prof["dcf"] }}</p>
+        <p style="color: #000; text-align:center"> Market Cap: {{ mktCap }}</p>
+        <p style="color: #000; text-align:center"> Beta: {{ prof["beta"] }}</p>
+        <p style="color: #000; text-align:center"> Dividend Yield: {{ div }}%</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Payout Ratio" data-content="Payout Ratio is the amount paid out by the company in dividends - relative to net income."><u>Payout Ratio:</u> {{ payoutratio }}%</p>
+        <p></p>
+        <hr>
+        <p></p>
+        <h2 style="color: #000; text-align:center">Key Ratios</h2>
+        <p></p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "ROE" data-content="ROE is calculated as (Net Income/Shareholders' Equity). [S&P500 Average: 8.35%] "><u>ROE:</u> {{ roe }}%</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "ROA" data-content="ROA is calculated as (Net Income/Total Assets).  [Average is typically 5-20% - varies by business and industry]"><u>ROA:</u> {{ roa }}%</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "PE" data-content="PE is calculated as (Share Price/Earnings Per Share). [S&P500 Average: 13-15]"><u>P/E Ratio:</u> {{ pe }}</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Price-Book" data-content="Price-Book is calculated as (Market Price per Share/Book Value per Share). [Undervalued: < 3]"><u>Price-to-Book Ratio:</u> {{ pb }}</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Debt-to-Equity" data-content="Debt/Equity is calculated as (Total Liabilities/Total Shareholders' Equity). [Excessive debt: > 1.5]"><u>Debt-to-Equity Ratio:</u> {{ de }}</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "EV/EBITDA" data-content="EV/EBITDA measures firm overall financial performance, calculation - (Enterprise Value/Earnings before Interest, Taxes, Depreciation & Amortization). [S&P500 Average: 11-14]"><u>EV/EBITDA:</u> {{ eveb }}</p>
+        <p></p>
+        <hr>
+        <p></p>
+        <h2 style="color: #000; text-align:center">Operating Info</h2>
+        <p></p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Gross Profit Margin" data-content="GPM is calculated as (Revenue-COGS / Revenue). [Above 20 is considered high and evidence of sizeable economic moat if persistent. Below 5 is considered low]"><u>Gross Profit Margin:</u> {{ gpm }}%</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Operating Profit Margin" data-content="OPM measures profit made per dollar of sales. Calculated as (EBIT/Sales Revenue).  [Cross Industry Average: 7.71% - varies by business and industry]"><u>Operating Profit Margin:</u> {{ opm }}%</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Inventory Turnover" data-content="Inventory Turnover shows the number of times a company sells and replaces its inventory per period. [Highest for low-cost and high-volume retailers]"><u>Inventory Turnover:</u> {{ invto }}</p>
+        <p style="color: #000; text-align:center" data-toggle="popover" title= "Interest Coverage Ratio" data-content="Interest Coverage Ratio is calculated as (EBIT/Interest Expense). [<1.5 indicates potential difficulty in meeting debts]"><u>Interest Coverage Ratio:</u> {{ intcov }}</p>
+    </div>
+
+{% endblock %}
